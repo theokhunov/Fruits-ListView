@@ -12,14 +12,19 @@ import com.example.fruits.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private val fruits = arrayListOf<String>("Apple", "Banana", "Peach", "Apricot")
+    private val fruits = arrayListOf<FruitModel>(
+        FruitModel("apple",R.drawable.apple),
+        FruitModel("apricot",R.drawable.apricot),
+        FruitModel("banana",R.drawable.banana),
+        FruitModel("peach",R.drawable.peach),
+    )
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         enableEdgeToEdge()
         setContentView(binding.root)
 
-        val adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, fruits)
+        val adapter = CustomAdapter(this,fruits)
         binding.listView.adapter = adapter
 
         binding.listView.setOnItemClickListener { _, _, position, _ ->
